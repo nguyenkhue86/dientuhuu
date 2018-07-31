@@ -1,0 +1,145 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column" PerfectScrollbar>
+    <!-- CONTENT -->
+    <div class="content p-24">
+       <div class="h1">
+          Trading Account
+       </div>
+       <p class="pt-10">
+       </p>
+       <div fxLayout="row wrap" fxFlex="100" *IfOnDom fxLayout="column" fxLayout.gt-md="row">
+       <!-- REACTIVE FORM EXAMPLE -->
+       <form class="mat-white-bg mat-elevation-z1 p-24 mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" >
+        <div>  
+        <div>
+             <div fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
+                <div class="h2 mb-24">List Trading Account</div>
+                <div class="control-div">
+                   <button mat-button (click)="hide($event)">
+                      <mat-icon class="nav-link-icon" color="warn" >cancel</mat-icon>
+                      Hide
+                   </button>
+                   <button mat-button (click)="search($event)">
+                      <mat-icon class="nav-link-icon" color="warn">search</mat-icon>
+                      Search
+                   </button>
+                   <button mat-button (click)="clear()">
+                      <mat-icon class="nav-link-icon" color="warn">clear</mat-icon>
+                      Clear
+                   </button>
+                </div>
+             </div>
+          </div>
+
+          <div fxFlex="1 0 auto" fxFlex="100" fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0">
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Account Name</mat-label>
+              <input type="text" placeholder="03 chars to search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Account Type</mat-label>
+              <input type="text" placeholder="03 chars to search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Owner</mat-label>
+              <input type="text" placeholder="03 chars to search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Status</mat-label>
+              <input type="text" placeholder="03 chars to search" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </div>
+
+        <div fxFlex="1 0 auto" fxFlex="100" fxLayout="column" fxLayoutAlign="wrap">
+
+         <mat-table #table [dataSource]="data.dataSource">
+
+           <ng-container cdkColumnDef="accountName">
+             <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Account Name</mat-header-cell>
+             <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails()">
+               <p class="text-truncate font-weight-600">
+                 {{contact.accountName}}</p>
+             </mat-cell>
+           </ng-container>
+
+           <ng-container cdkColumnDef="accountType">
+             <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Account Type</mat-header-cell>
+             <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails()">
+               <p class="position text-truncate">
+                 {{contact.accountType}}
+               </p>
+             </mat-cell>
+           </ng-container>
+
+           <ng-container cdkColumnDef="owner">
+             <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Owner</mat-header-cell>
+             <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails()">
+               <p class="office text-truncate">
+                 {{contact.owner}}
+               </p>
+             </mat-cell>
+           </ng-container>
+
+          <ng-container cdkColumnDef="status">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Status</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails()">
+              <p class="office text-truncate">
+                {{contact.status}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="location">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Country Of Location</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails()">
+              <p class="office text-truncate">
+                {{contact.country}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let contact; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator2
+            [length]="10"
+            [pageIndex]="1"
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 25, 50, 100, 250]">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </form>
+</div>
+ <!-- / CONTENT -->
+    </div>
+ </div>

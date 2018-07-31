@@ -1,0 +1,80 @@
+<mat-toolbar class="p-0" style="border-bottom: 1px solid #dcdcdc;height: 68px;">
+
+  <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
+    <div fxFlex fxFill fxLayout="row">
+        <div fxLayout="row" fxFlex="50">
+            <img src="assets/images/logos/logo_hl_new.png" style="height: 60px">
+        </div>
+
+        <div *ngIf="!login" fxLayout="row-reverse" fxFlex="50" fxLayoutAlign="center">
+            <button class="button-c">Create new Account</button>
+            <div class="toolbar-separator"></div>
+            <button class="button-c" (click)="signIn()">Sign In</button>
+            <div class="toolbar-separator"></div>
+            <form fxLayout="row-reverse" fxFlex="1 0 auto" name="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl">
+                    <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+                </mat-form-field>
+            </form>
+        </div>
+
+        <div *ngIf="login" fxLayout="row-reverse" fxFlex="50" fxLayoutAlign="center">
+            <button class="button-c" (click)="logout()">Logout</button>
+            <div class="toolbar-separator"></div>
+            <div fxLayoutAlign="center">
+                Welcome, DC3B
+            </div>
+            <div class="toolbar-separator"></div>
+            <form fxLayout="row-reverse" fxFlex="1 0 auto" name="form">
+                <mat-form-field appearance="outline">
+                    <mat-label>Search</mat-label>
+                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl">
+                    <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+                </mat-form-field>
+            </form>
+        </div>
+<!--         
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button class="toggle-button-navbar"
+                    *ngIf="!noNav"
+                    (click)="toggleSidebarOpened('navbar')" fxHide.gt-md>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <div class="toolbar-separator" fxHide.gt-md></div>
+        </div>
+
+        <div fxFlex="1 0 auto" *ngFor="let tutorial of title | async">
+            <mat-icon>{{tutorial.icon}}</mat-icon>
+            {{tutorial.name}}
+        </div>
+
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+            <div class="toolbar-separator"></div>
+            <button mat-button fxHide fxShow.gt-xs
+                    class="language-button"
+                    [matMenuTriggerFor]="languageMenu">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
+                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
+                </div>
+            </button>
+            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <img class="flag mr-16" [src]="'assets/images/flags/'+lang.flag+'.png'">
+                        <span class="iso">{{lang.title}}</span>
+                    </div>
+                </button>
+            </mat-menu>
+            <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
+            <div class="icon-width">
+                <button mat-icon-button
+                    [matMenuTriggerFor]="logout">
+                <mat-icon class="icon">power_settings_new</mat-icon>
+              </button>
+            </div>
+        </div> -->
+    </div>
+</mat-toolbar>

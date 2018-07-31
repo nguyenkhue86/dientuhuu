@@ -1,0 +1,85 @@
+.mat-radio-button ~ .mat-radio-button {
+  padding-right: 30px;
+}
+
+mat-radio-button {
+  margin-left: 150px;
+}
+
+mat-lable {
+  margin-right: 30px;
+}
+
+@media only screen and (max-width: 1522px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 30px;
+  }
+  
+  mat-radio-button {
+    margin-left: 100px;
+  }
+}
+
+@media only screen and (max-width: 1322px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 20px;
+  }
+  
+  mat-radio-button {
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (max-width: 842px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 10px;
+  }
+  
+  mat-radio-button {
+    margin-left: 25px;
+  }
+}
+
+@media only screen and (max-width: 722px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 5px;
+  }
+  
+  mat-radio-button {
+    margin-left: 12px;
+  }
+}
+
+@media only screen and (max-width: 722px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 5px;
+  }
+  
+  mat-radio-button {
+    margin-left: 5px;
+  }
+}
+
+@media only screen and (max-width: 633px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 0px;
+  }
+  
+  mat-radio-button {
+    margin-left: 5px;
+  }
+
+  mat-lable {
+    margin-right: 15px;
+  }
+}
+
+@media only screen and (max-width: 559px) {
+  .mat-radio-button ~ .mat-radio-button {
+    padding-right: 30px;
+  }
+  
+  mat-radio-button {
+    margin-left: 150px;
+  }
+}

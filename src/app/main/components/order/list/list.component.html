@@ -1,0 +1,169 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column" PerfectScrollbar>
+    <!-- CONTENT -->
+    <div class="content p-24">
+       <div fxLayout="row wrap" fxFlex="100" *IfOnDom fxLayout="column" fxLayout.gt-md="row">          
+       <!-- REACTIVE FORM EXAMPLE -->
+       <form class="mat-white-bg mat-elevation-z1 p-24 mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form" >
+        <div>  
+        <div>
+             <div fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
+                <div class="h2 mb-24">List Order</div>
+                <div class="control-div">
+                   <button mat-button (click)="hide($event)">
+                      <mat-icon class="nav-link-icon" color="warn" >cancel</mat-icon>
+                      Hide
+                   </button>
+                   <button mat-button (click)="search($event)">
+                      <mat-icon class="nav-link-icon" color="warn">search</mat-icon>
+                      Search
+                   </button>
+                   <button mat-button (click)="clear()">
+                      <mat-icon class="nav-link-icon" color="warn">clear</mat-icon>
+                      Clear
+                   </button>
+                </div>
+             </div>
+          </div>
+
+          <div fxFlex="1 0 auto" fxFlex="100" fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0">
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+                <mat-label>Buy/Sell</mat-label>
+                <input type="text" placeholder="03 chars to search" aria-label="Number" matInput [formControl]="myControlBuySell" [matAutocomplete]="autoBuySell">
+                <mat-icon matSuffix class="nav-link-icon">arrow_drop_down</mat-icon>
+                <mat-autocomplete autoActiveFirstOption #autoBuySell="matAutocomplete">
+                  <mat-option *ngFor="let option of optionsBuySell" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Bond Instrument</mat-label>
+              <input type="text" placeholder="Bond" aria-label="Number" matInput [formControl]="myControlBond" [matAutocomplete]="autoBond"
+              (keyup)="0" >
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete #autoBond="matAutocomplete" (optionSelected)="selectBond($event)">
+                <mat-option *ngFor="let bond of filteredBonds | async" [value]="bond.ISIN">
+                  {{bond.ISIN}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Trading Account</mat-label>
+              <input type="text" placeholder="Account" (keyup)="0" aria-label="Number" matInput [formControl]="myControlAccount" [matAutocomplete]="autoAccount">
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #autoAccount="matAutocomplete" (optionSelected)="selectAccount($event)">
+                <mat-option *ngFor="let account of filteredAccounts | async" [value]="account.accountCode">                  
+                  <span>{{ account.accountCode }}</span> |
+                  <small>Name: {{account.accountName}}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Status</mat-label>
+              <input type="text" placeholder="03 chars to search" aria-label="Number" matInput [formControl]="myControlStatus" [matAutocomplete]="autoStatus">
+              <mat-icon matSuffix class="nav-link-icon">arrow_drop_down</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #autoStatus="matAutocomplete">
+                <mat-option *ngFor="let option of optionsStatus" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </div>
+
+        <div fxFlex="1 0 auto" fxFlex="100" fxLayout="column" fxLayoutAlign="wrap">
+
+         <mat-table #table [dataSource]="data.dataSource">
+
+           <ng-container cdkColumnDef="transactionType">
+             <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Buy/Sell</mat-header-cell>
+             <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+               <p class="text-truncate font-weight-600">
+                 {{contact.transactionType === 1 ? 'Sell' : 'Buy'}}</p>
+             </mat-cell>
+           </ng-container>
+
+           <ng-container cdkColumnDef="tradingAccount">
+             <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Trading Account</mat-header-cell>
+             <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+               <p class="position text-truncate">
+                  {{ contact.tradingAccount != null ? contact.tradingAccount.accountCode : "" }}
+               </p>
+             </mat-cell>
+           </ng-container>
+
+           <ng-container cdkColumnDef="isin">
+             <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Bond Instrument</mat-header-cell>
+             <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+               <p class="office text-truncate">
+                 {{contact.ISIN}}
+               </p>
+             </mat-cell>
+           </ng-container>
+
+           <ng-container cdkColumnDef="orderTime">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Order Time</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+              <p class="office text-truncate">
+                {{contact.orderTime}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="status">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Status</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+              <p class="office text-truncate">
+                {{contact.status}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="quantity">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Quantity</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+              <p class="office text-truncate">
+                {{contact.quantity}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="tradeCurrency">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Trade Currency</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+              <p class="office text-truncate">
+                {{contact.tradeCurrency}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <ng-container cdkColumnDef="settlementCurrency">
+            <mat-header-cell *cdkHeaderCellDef mat-sort fxFlex="20">Settlement Currency</mat-header-cell>
+            <mat-cell *cdkCellDef="let contact" fxFlex="20" (click)="toDetails(contact.orderId)">
+              <p class="office text-truncate">
+                {{contact.settlementCurrency}}
+              </p>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let contact; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <mat-paginator #paginator2
+            [length]="10"
+            [pageIndex]="1"
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 25, 50, 100, 250]">
+        </mat-paginator>
+      </div>
+
+    </div>
+  </form>
+</div>
+ <!-- / CONTENT -->
+    </div>
+ </div>
