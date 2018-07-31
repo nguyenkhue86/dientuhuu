@@ -10,14 +10,6 @@ import { LayoutModule } from './layout/layout.module';
 import { AppComponent } from './app.component';
 import { MainModule } from './main/main.module';
 
-import { OrganisationModule } from './main/components/organisation/organisation.module';
-import { TradingAccountModule } from './main/components/trading-account/trading-account.module';
-import { BondModule } from './main/components/bond/bond.module';
-import { QuoteModule } from './main/components/quote/quote.module';
-import { OrderModule } from './main/components/order/order.module';
-import { BondTransactionModule } from './main/components/bond-transaction/bond-transaction.module';
-import { BondTransferModule } from './main/components/bond-transfer/bond-transfer.module';
-
 import { SharedModule } from './layout/shared.module';
 import { LayoutConfig } from './layout-config';
 import { DashboardModule } from './main/components/dashboard/dashboard.module';
@@ -62,13 +54,6 @@ const appRoutes: Routes = [
         LoginModule,
         HomeModule,
         UserModule,
-        OrganisationModule,
-        TradingAccountModule,
-        BondModule,
-        QuoteModule,
-        OrderModule,
-        BondTransactionModule,
-        BondTransferModule,
 
         DashboardModule,
         MatTableModule,
