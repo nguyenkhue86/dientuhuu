@@ -24,6 +24,7 @@ import { reducerTitle } from './main/reducers/title.reducer';
 import { HomeModule } from './main/components/home/home.module';
 import { LoginModule } from './main/components/login/login.module';
 import { UserModule } from './main/components/user/user.module';
+import { AmplifierModule } from './main/components/amplifier/amplifier.module';
 
 
 const appRoutes: Routes = [
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
         LoginModule,
         HomeModule,
         UserModule,
+        AmplifierModule,
 
         DashboardModule,
         MatTableModule,

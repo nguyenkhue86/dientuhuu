@@ -1,3 +1,4 @@
+const icon = 'label_important';
 export const navigation = [
     // {
     //     'id'      : 'applications',
@@ -14,52 +15,28 @@ export const navigation = [
             //     'url'  : '/dashboard',
             // },
             {
-                'id'   : 'organisation',
-                'title': 'Organisation',
-                'translate': 'NAV.ORGANISATION.TITLE',
+                'id'   : 'amplifier',
+                'title': 'Amplifier',
+                'translate': 'NAV.AMPLIFIER.TITLE',
                 'type' : 'item',
-                'icon' : 'account_balance',
-                'url'  : '/organisation',
+                'icon' : icon,
+                'url'  : '/amplifier',
             },
             {
-                'id'   : 'trading-account',
-                'title': 'Trading Account',
-                'translate': 'NAV.TRADING-ACCOUNT.TITLE',
+                'id'   : 'speaker',
+                'title': 'Speaker',
+                'translate': 'NAV.SPEAKER.TITLE',
                 'type' : 'item',
-                'icon' : 'account_balance',
-                'url'  : '/trading-account',
+                'icon' : icon,
+                'url'  : '/speaker',
             },
             {
-                'id'   : 'bond',
-                'title': 'Bond',
-                'translate': 'NAV.BOND.TITLE',
+                'id'   : 'player',
+                'title': 'CD/DVD Player',
+                'translate': 'NAV.PLAYER.TITLE',
                 'type' : 'item',
-                'icon' : 'account_balance',
-                'url'  : '/bond',
-            },
-            {
-                'id'   : 'quote',
-                'title': 'Quote',
-                'translate': 'NAV.QUOTE.TITLE',
-                'type' : 'item',
-                'icon' : 'account_balance',
-                'url'  : '/quote',
-            },
-            {
-                'id'   : 'order',
-                'title': 'Order',
-                'translate': 'NAV.ORDER.TITLE',
-                'type' : 'item',
-                'icon' : 'account_balance',
-                'url'  : '/order',
-            },
-            {
-                'id'   : 'bond-transaction',
-                'title': 'Bond Transaction',
-                'translate': 'NAV.BOND-TRANSACTION.TITLE',
-                'type' : 'item',
-                'icon' : 'account_balance',
-                'url'  : '/bond-transaction',
+                'icon' : 'label_important',
+                'url'  : '/player',
             }
     //     ]
     // }
