@@ -1,0 +1,58 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column" PerfectScrollbar>
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+       <div fxLayout="row wrap" fxFlex="100" *IfOnDom fxLayout="column" fxLayout.gt-md="row">
+       <!-- REACTIVE FORM EXAMPLE -->
+          <div fxFlex="1 0 auto" fxFlex="100" fxLayout="column">  
+            <div>
+              <div fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between" fxFlex="1 0 auto">
+                <div class="h1 mb-24">List Amply</div>
+                <div class="control-div" fxLayout="row" fxFlex="50" fxLayoutAlign="end">
+                    <form fxFlex="30">
+                        <mat-form-field >
+                          <mat-label>Name Filter</mat-label>
+                          <input type="text" placeholder="03 chars to search" aria-label="Number" (keyup.enter)="search($event)" name="shortName" matInput [formControl]="shortName" >
+                          <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+                        </mat-form-field>
+                        </form>
+                </div>
+              </div>
+            </div>
+
+            <div fxFlex="1 0 auto" fxFlex="100" >
+              <hr>
+            </div>
+
+            <div>
+              <div fxLayout= "row wrap" fxLayout.xs="column" fxFlex="1 0 auto" fxFlex="100"  fxLayoutAlign="start" fxLayoutGap="1%">
+                  <div fxFlex.gt-xs="24" class="car-margin-bottom" fxFlex.xs="100" *ngFor="let amplifier of amplifiers">
+                      <mat-card>
+                          <mat-card-title>{{amplifier.name}}</mat-card-title>
+                          <mat-card-subtitle>{{amplifier.model}}</mat-card-subtitle>
+                          <mat-card-content>
+                            <img mat-card-image src={{amplifier.image}} fxLayoutAlign="center">
+                            <p class="color-price">{{amplifier.price}}</p>
+                          </mat-card-content>
+                          <mat-card-actions>
+                            <button mat-raised-button color="primary">Buy</button>
+                            <button mat-raised-button color="primary">Detail</button>
+                          </mat-card-actions>
+                          <mat-card-footer></mat-card-footer>
+                        </mat-card>
+                  </div>
+              </div>
+
+            <mat-paginator
+                [length]="10"
+                [pageIndex]="1"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 25, 50, 100, 250]">
+              </mat-paginator>
+            </div>
+
+          </div>
+      </div>
+ <!-- / CONTENT -->
+    </div>
+ </div>
