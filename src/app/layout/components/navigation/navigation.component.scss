@@ -1,0 +1,17 @@
+// Material theming
+@import "src/app/layout/scss/theming";
+
+// Breakpoint mixins
+@import "src/app/layout/scss/mixins/breakpoints";
+
+
+navigation {
+    display: flex;
+    flex: 1 0 auto;
+
+    #main-navigation {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+}

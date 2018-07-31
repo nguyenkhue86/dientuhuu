@@ -1,0 +1,100 @@
+<mat-toolbar class="p-0" style="border-bottom: 1px solid #dcdcdc;height: 50px;">
+
+  <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="10%" fxLayout="row" fxLayoutAlign="start center">
+            <button mat-icon-button class="toggle-button-navbar"
+                *ngIf="!noNav"
+                (click)="toggleSidebarOpened('navbar')" fxHide.gt-md>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <div class="toolbar-separator" fxHide.gt-md></div>
+        </div>
+
+        <!-- <div fxFlex="0%" fxFlex.gt-xs="10%"></div> -->
+        <div fxFlex="1 0 auto" fxLayout="row" fxLayoutAlign="start center">
+            <div class="toolbar-separator" style="height: 50px"></div>
+            <button [routerLink]="home" mat-button fxHide fxShow.gt-xs >
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    Home
+                </div>
+            </button>
+            <div class="toolbar-separator" style="height: 50px"></div>
+            <button mat-button fxHide fxShow.gt-xs [matMenuTriggerFor]="exchange">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    Exchange
+                </div>
+            </button>
+
+            <mat-menu #exchange="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <span class="iso">Price</span>
+                    </div>
+                </button>
+                <button mat-menu-item>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <span class="iso">Market</span>
+                    </div>
+                </button>
+            </mat-menu>
+
+            <div class="toolbar-separator" style="height: 50px"></div>
+            <button mat-button fxHide fxShow.gt-xs>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    About
+                </div>
+            </button>
+            <div class="toolbar-separator" style="height: 50px"></div>
+            <button mat-button fxHide fxShow.gt-xs>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    Contact
+                </div>
+            </button>
+            <div class="toolbar-separator" style="height: 50px"></div>
+        </div>
+        
+        <!-- <div fxFlex="1 0 auto" *ngFor="let tutorial of title | async">
+            <mat-icon>{{tutorial.icon}}</mat-icon>
+            {{tutorial.name}}
+        </div> -->
+
+        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+
+            <div class="toolbar-separator" style="height: 50px"></div>
+
+            <button mat-button fxHide fxShow.gt-xs
+                    class="language-button"
+                    [matMenuTriggerFor]="languageMenu">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
+                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
+                </div>
+            </button>
+            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+                <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <img class="flag mr-16" [src]="'assets/images/flags/'+lang.flag+'.png'">
+                        <span class="iso">{{lang.title}}</span>
+                    </div>
+                </button>
+            </mat-menu>
+
+            <div class="toolbar-separator" fxHide fxShow.gt-xs  style="height: 50px"></div>
+
+            <!-- <div class="icon-width">
+                <button mat-icon-button
+                    [matMenuTriggerFor]="logout">
+                    <mat-icon class="icon">power_settings_new</mat-icon>
+                </button>
+            </div> -->
+          <!-- <mat-menu #logout="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item>
+              <div fxLayout="row" fxLayoutAlign="start center">
+                <span class="iso">Logout</span>
+              </div>
+            </button>
+          </mat-menu> -->
+        </div>
+    </div>
+</mat-toolbar>

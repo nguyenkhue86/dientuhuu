@@ -1,0 +1,167 @@
+<div id="forms" class="page-layout simple fullwidth" fxLayout="column" PerfectScrollbar>
+  <div class="content p-24">
+
+    <div class="h1">
+      Quote
+    </div>
+    <p class="pt-10">
+    </p>
+    <div fxLayout="row wrap" fxFlex="100" *IfOnDom fxLayout="column" fxLayout.gt-md="row">
+
+      <form class="mat-white-bg mat-elevation-z1 p-24 mb-24" fxLayout="column" fxLayoutAlign="start" fxFlex="1 0 auto" name="form"
+        [formGroup]="form">
+        <div>
+
+          <div>
+            <div fxFlex="1 0 auto" fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between">
+              <div class="h2 mb-24">Bond Details {{isin}}</div>
+              <div class="control-div">
+                <button mat-button (click)="back($event)" *ngIf="!activeEdit">
+                  <mat-icon class="nav-link-icon" color="warn">reply</mat-icon>
+                  Back
+                </button>
+                <button mat-button (click)="amend($event)" *ngIf="!activeEdit">
+                  <mat-icon class="nav-link-icon" color="warn">edit</mat-icon>
+                  Amend
+                </button>
+                <button mat-button (click)="save()" *ngIf="activeEdit" style="float: right;">
+                  <mat-icon class="nav-link-icon" color="warn">save</mat-icon>
+                  Save
+                </button>
+                <button mat-button (click)="cancel($event)" *ngIf="activeEdit">
+                  <mat-icon class="nav-link-icon" color="warn">cancel</mat-icon>
+                  Cancel
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <div fxFlex="1 0 auto" fxFlex="100" fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxLayoutGap="10px" fxLayoutGap.xs="0"
+            *IfOnDom>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Quote Type</mat-label>
+              <mat-select placeholder="N/A" formControlName="quoteType">
+                <mat-option *ngFor="let type of quoteTypes" [value]="type.value">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Quantity</mat-label>
+              <input matInput placeholder="Quantity" formControlName="quantity">
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Price</mat-label>
+              <input matInput placeholder="Price" formControlName="price">
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="25">
+              <mat-label>Trading Account</mat-label>
+              <input matInput placeholder="03 chars to search" (keyup)="searchTradingAccount($event.target.value)"
+                [matAutocomplete]="autotradingAccount" formControlName="tradingAccount">
+              <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+              <mat-autocomplete autoActiveFirstOption #autotradingAccount="matAutocomplete" [displayWith]="displayTradingAccount">
+                <mat-option *ngFor="let option of tradingAccounts" [value]="option">
+                  {{option.accountName}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <mat-label>Status</mat-label>
+              <mat-select placeholder="Status....." formControlName="status">
+                <mat-option *ngFor="let s of status" [value]="s.value">
+                  {{s.name}}
+                </mat-option>
+              </mat-select>
+              <!-- <mat-error *ngIf="formErrors.legalName.required">
+                  Trading Account is required!
+                </mat-error> -->
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="1 0 auto" fxFlex="100" fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutGap="10px" fxLayoutGap.xs="0" *IfOnDom>
+
+            <div fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <div fxFlex="1 0 auto" fxFlex="100" class="h2 mb-24">
+                Bond Details
+                <hr>
+              </div>
+
+
+
+              <div fxFlex="1 0 auto" fxFlex="100" fxLayout="column">
+                <!-- <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="25" *ngIf="!activeEdit">
+                  <mat-label>ISIN</mat-label>
+                  <input type="text" placeholder="03 chars to search" #isinCusip aria-label="Number" matInput formControlName="ISIN">
+                </mat-form-field> -->
+                <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="25"> <!--*ngIf="activeEdit"-->
+                  <mat-label>ISIN</mat-label>
+                  <input matInput placeholder="ISIN" formControlName="ISIN" #ISIN (keyup)="getBond($event.target.value)" [matAutocomplete]="autoBond">
+                  <mat-autocomplete autoActiveFirstOption #autoBond="matAutocomplete" [displayWith]="displayBond">
+                    <mat-option *ngFor="let _option of bond" [value]="_option" (click)="setBond($event)">
+                      {{_option.ISIN}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance={{appearance}}>
+                  <mat-label>Issuer</mat-label>
+                  <input matInput placeholder="Ticker" formControlName="issuer">
+                </mat-form-field>
+
+                <mat-form-field appearance={{appearance}}>
+                  <mat-label>Maturity Date</mat-label>
+                  <input matInput [matDatepicker]="_maturityDate" formControlName="maturityDate">
+                  <mat-datepicker-toggle matSuffix [for]="_maturityDate"></mat-datepicker-toggle>
+                  <mat-datepicker #_maturityDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxFlex.xs="100" fxFlex.gt-xs="auto">
+              <div fxFlex="1 0 auto" fxFlex="100" class="h2 mb-24">
+                Quote Details
+                <hr>
+              </div>
+
+              <div fxFlex="1 0 auto" fxFlex="100" fxLayout="column">
+
+                <mat-form-field appearance={{appearance}}>
+                  <mat-label>Time Of Quote</mat-label>
+                  <input matInput placeholder="Location" type="datetime-local" formControlName="timeOfQuote">
+                </mat-form-field>
+
+                <mat-form-field appearance={{appearance}} fxFlex.xs="100" fxFlex.gt-xs="25">
+                  <mat-label>Market</mat-label>
+                  <input matInput placeholder="Market" formControlName="market" [matAutocomplete]="autoMarket">
+                  <mat-icon matSuffix class="nav-link-icon">search</mat-icon>
+                  <mat-autocomplete autoActiveFirstOption #autoMarket="matAutocomplete">
+                    <mat-option *ngFor="let option of market" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+
+                <mat-form-field appearance={{appearance}}>
+                  <mat-label>Trade Currency</mat-label>
+                  <input matInput placeholder="Country Of Location" formControlName="tradeCurrency">
+                </mat-form-field>
+
+                <mat-form-field appearance={{appearance}}>
+                  <mat-label>Settlement Currency</mat-label>
+                  <input matInput placeholder="Country Of Location" formControlName="settlementCurrency">
+                </mat-form-field>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

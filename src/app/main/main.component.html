@@ -1,0 +1,81 @@
+<mat-sidenav-container>
+
+    <div *ngIf="login" id="main-content" >
+
+        <!-- TOOLBAR: Above -->
+        <toolbar-top>
+
+        </toolbar-top>
+        <ng-container *ngIf="Settings.layout.toolbar === 'above'">
+            <toolbar class="above" [ngClass]="Settings.colorClasses.toolbar"></toolbar>
+        </ng-container>
+        <!-- / TOOLBAR: Above -->
+
+        <!-- NAVBAR: Top -->
+        <navbar layout="horizontal"
+                     class="top-navbar" fxHide fxShow.gt-md
+                     [ngClass]="Settings.colorClasses.navbar"
+                     *ngIf="Settings.layout.navigation === 'top'">
+        </navbar>
+        <!-- / NAVBAR: Top -->
+
+        <div id="wrapper">
+
+            <!-- NAVBAR: Left -->
+            <sidebar [name]="'navbar'"
+                          [folded]="Settings.layout.navigationFolded"
+                          [lockedOpen]="'gt-md'"
+                          class="left-navbar" [ngClass]="Settings.colorClasses.navbar"
+                          *ngIf="(Settings.layout.navigation === 'left' || Settings.layout.navigation === 'top') && login">
+                <navbar layout="vertical"></navbar>
+            </sidebar>
+            <!-- / NAVBAR: Left -->
+
+            <div class="content-wrapper">
+
+                <!-- TOOLBAR: Below -->
+                <ng-container *ngIf="Settings.layout.toolbar === 'below'">
+                    <toolbar class="below" [ngClass]="Settings.colorClasses.toolbar"></toolbar>
+                </ng-container>
+                <!-- / TOOLBAR: Below -->
+
+                <app-content></app-content>
+
+                <!-- FOOTER: Below -->
+                <ng-container *ngIf="Settings.layout.footer === 'below'">
+                    <footer class="below" [ngClass]="Settings.colorClasses.footer"></footer>
+                </ng-container>
+                <!-- / FOOTER: Below -->
+
+            </div>
+
+            <!-- NAVBAR: Right -->
+            <sidebar [name]="'navbar'" [align]="'right'"
+                          [folded]="Settings.layout.navigationFolded"
+                          [lockedOpen]="'gt-md'"
+                          class="right-navbar" [ngClass]="Settings.colorClasses.navbar"
+                          *ngIf="Settings.layout.navigation === 'right'">
+                <navbar layout="vertical"></navbar>
+            </sidebar>
+            <!-- / NAVBAR: Right -->
+
+        </div>
+
+        <!-- FOOTER: Above -->
+        <ng-container *ngIf="Settings.layout.footer === 'above'">
+            <footer class="above" [ngClass]="Settings.colorClasses.footer"></footer>
+        </ng-container>
+        <!-- FOOTER: Above -->
+
+    </div>
+
+    <!-- QUICK PANEL -->
+    <mat-sidenav MatSidenavHelper="quick-panel" position="end">
+        <quick-panel></quick-panel>
+    </mat-sidenav>
+    <!-- / QUICK PANEL -->
+    <div *ngIf="!login" id="main-content" >
+        <app-login></app-login>
+    </div>
+</mat-sidenav-container>
+
