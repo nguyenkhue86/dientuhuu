@@ -10,6 +10,7 @@ import tma.com.vn.dts.service.ImageService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/images")
 public class DataController {
     @Autowired
