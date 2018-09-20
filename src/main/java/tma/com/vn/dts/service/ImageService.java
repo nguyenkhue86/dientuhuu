@@ -29,7 +29,8 @@ public class ImageService {
         ie.setName(imageEntity.getName());
         ie.setImg(imageEntity.getImg());
         ie.setDescription(imageEntity.getDescription());
-        return ie;
+        return imageRepository.save(ie);
+
     }
 
     public Boolean delete(Long id){
