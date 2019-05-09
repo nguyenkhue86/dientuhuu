@@ -1,0 +1,19 @@
+:host ::ng-deep{
+  background-color: antiquewhite;
+  .title {
+    padding: 20px 0 20px 10px;
+    font-size: 32px;
+    font-weight: 500;
+  }
+  .border-first-child {
+    border-top: 1px solid rgba(0,0,0,.12);
+  }
+  .menu-item {
+    padding-left: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    .mat-icon {}
+    .menu-title {
+      padding: 10px;
+    }
+  }
+}

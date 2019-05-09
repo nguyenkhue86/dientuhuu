@@ -1,0 +1,9 @@
+<div class="navbar-container" fxLayout="column">
+  <div class="title">
+    N&K
+  </div>
+  <div class="menu-item" *ngFor="let item of menuList; let i = index" [ngClass]="{'border-first-child': i === 0}" fxLayout="row" fxLayoutAlign="start center">
+    <mat-icon>{{item.icon}}</mat-icon>
+    <div class="menu-title" (click)="getComponent(item.path)">{{item.name}}</div>
+  </div>
+</div>

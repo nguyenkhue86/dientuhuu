@@ -1,0 +1,22 @@
+.container {
+  max-width: 1366px;
+  margin: 0 auto;
+  font-family: Roboto, Tahoma, sans-serif;
+  .header {
+    background-color: aquamarine;
+    height: 200px;
+    width: 100%;
+  }
+  .content {
+    width: 100%;
+    .navbar {
+      width: 250px;
+      height: calc(100vh - 200px);
+    }
+    .session {
+      width: 100%;
+      height: calc(100vh - 200px);
+    }
+  }
+
+}
